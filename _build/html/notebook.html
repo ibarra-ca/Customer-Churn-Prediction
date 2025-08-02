@@ -1,0 +1,1628 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Proyecto predicciones para pérdida de clientes &#8212; Predicción para Beta Bank sobre pérdidas de clientes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Instrucciones del proyecto" href="instrucciones.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Predicción para Beta Bank sobre pérdidas de clientes - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Predicción para Beta Bank sobre pérdidas de clientes - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="instrucciones.html">Instrucciones del proyecto</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Proyecto predicciones para pérdida de clientes</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ibarra-ca/Customer-Churn-Prediction" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ibarra-ca/Customer-Churn-Prediction/issues/new?title=Issue%20on%20page%20%2Fnotebook.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Proyecto predicciones para pérdida de clientes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="proyecto-predicciones-para-perdida-de-clientes">
+<h1>Proyecto predicciones para pérdida de clientes<a class="headerlink" href="#proyecto-predicciones-para-perdida-de-clientes" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importar librerias</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">st</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">shuffle</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargar los datos</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/Churn.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analizar datos del primer Dataframe</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 10000 entries, 0 to 9999
+Data columns (total 14 columns):
+ #   Column           Non-Null Count  Dtype  
+---  ------           --------------  -----  
+ 0   RowNumber        10000 non-null  int64  
+ 1   CustomerId       10000 non-null  int64  
+ 2   Surname          10000 non-null  object 
+ 3   CreditScore      10000 non-null  int64  
+ 4   Geography        10000 non-null  object 
+ 5   Gender           10000 non-null  object 
+ 6   Age              10000 non-null  int64  
+ 7   Tenure           9091 non-null   float64
+ 8   Balance          10000 non-null  float64
+ 9   NumOfProducts    10000 non-null  int64  
+ 10  HasCrCard        10000 non-null  int64  
+ 11  IsActiveMember   10000 non-null  int64  
+ 12  EstimatedSalary  10000 non-null  float64
+ 13  Exited           10000 non-null  int64  
+dtypes: float64(3), int64(8), object(3)
+memory usage: 1.1+ MB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RowNumber</th>
+      <th>CustomerId</th>
+      <th>Surname</th>
+      <th>CreditScore</th>
+      <th>Geography</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Tenure</th>
+      <th>Balance</th>
+      <th>NumOfProducts</th>
+      <th>HasCrCard</th>
+      <th>IsActiveMember</th>
+      <th>EstimatedSalary</th>
+      <th>Exited</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>15634602</td>
+      <td>Hargrave</td>
+      <td>619</td>
+      <td>France</td>
+      <td>Female</td>
+      <td>42</td>
+      <td>2.0</td>
+      <td>0.00</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>101348.88</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>15647311</td>
+      <td>Hill</td>
+      <td>608</td>
+      <td>Spain</td>
+      <td>Female</td>
+      <td>41</td>
+      <td>1.0</td>
+      <td>83807.86</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>112542.58</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>15619304</td>
+      <td>Onio</td>
+      <td>502</td>
+      <td>France</td>
+      <td>Female</td>
+      <td>42</td>
+      <td>8.0</td>
+      <td>159660.80</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113931.57</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>15701354</td>
+      <td>Boni</td>
+      <td>699</td>
+      <td>France</td>
+      <td>Female</td>
+      <td>39</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>93826.63</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>15737888</td>
+      <td>Mitchell</td>
+      <td>850</td>
+      <td>Spain</td>
+      <td>Female</td>
+      <td>43</td>
+      <td>2.0</td>
+      <td>125510.82</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>79084.10</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Valores nulos</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Identificar valores duplicados</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Valores duplicados: &quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RowNumber            0
+CustomerId           0
+Surname              0
+CreditScore          0
+Geography            0
+Gender               0
+Age                  0
+Tenure             909
+Balance              0
+NumOfProducts        0
+HasCrCard            0
+IsActiveMember       0
+EstimatedSalary      0
+Exited               0
+dtype: int64 
+
+Valores duplicados:  0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filas con al menos un valor nulo</span>
+<span class="n">filas_con_nulos</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">filas_con_nulos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RowNumber</th>
+      <th>CustomerId</th>
+      <th>Surname</th>
+      <th>CreditScore</th>
+      <th>Geography</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Tenure</th>
+      <th>Balance</th>
+      <th>NumOfProducts</th>
+      <th>HasCrCard</th>
+      <th>IsActiveMember</th>
+      <th>EstimatedSalary</th>
+      <th>Exited</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>30</th>
+      <td>31</td>
+      <td>15589475</td>
+      <td>Azikiwe</td>
+      <td>591</td>
+      <td>Spain</td>
+      <td>Female</td>
+      <td>39</td>
+      <td>NaN</td>
+      <td>0.00</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>140469.38</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>49</td>
+      <td>15766205</td>
+      <td>Yin</td>
+      <td>550</td>
+      <td>Germany</td>
+      <td>Male</td>
+      <td>38</td>
+      <td>NaN</td>
+      <td>103391.38</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>90878.13</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>52</td>
+      <td>15768193</td>
+      <td>Trevisani</td>
+      <td>585</td>
+      <td>Germany</td>
+      <td>Male</td>
+      <td>36</td>
+      <td>NaN</td>
+      <td>146050.97</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>86424.57</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>54</td>
+      <td>15702298</td>
+      <td>Parkhill</td>
+      <td>655</td>
+      <td>Germany</td>
+      <td>Male</td>
+      <td>41</td>
+      <td>NaN</td>
+      <td>125561.97</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>164040.94</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>61</td>
+      <td>15651280</td>
+      <td>Hunter</td>
+      <td>742</td>
+      <td>Germany</td>
+      <td>Male</td>
+      <td>35</td>
+      <td>NaN</td>
+      <td>136857.00</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>84509.57</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9944</th>
+      <td>9945</td>
+      <td>15703923</td>
+      <td>Cameron</td>
+      <td>744</td>
+      <td>Germany</td>
+      <td>Male</td>
+      <td>41</td>
+      <td>NaN</td>
+      <td>190409.34</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>138361.48</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9956</th>
+      <td>9957</td>
+      <td>15707861</td>
+      <td>Nucci</td>
+      <td>520</td>
+      <td>France</td>
+      <td>Female</td>
+      <td>46</td>
+      <td>NaN</td>
+      <td>85216.61</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>117369.52</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9964</th>
+      <td>9965</td>
+      <td>15642785</td>
+      <td>Douglas</td>
+      <td>479</td>
+      <td>France</td>
+      <td>Male</td>
+      <td>34</td>
+      <td>NaN</td>
+      <td>117593.48</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>113308.29</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9985</th>
+      <td>9986</td>
+      <td>15586914</td>
+      <td>Nepean</td>
+      <td>659</td>
+      <td>France</td>
+      <td>Male</td>
+      <td>36</td>
+      <td>NaN</td>
+      <td>123841.49</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>96833.00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9999</th>
+      <td>10000</td>
+      <td>15628319</td>
+      <td>Walker</td>
+      <td>792</td>
+      <td>France</td>
+      <td>Female</td>
+      <td>28</td>
+      <td>NaN</td>
+      <td>130142.79</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>38190.78</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>909 rows × 14 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tenure_con_0</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;Tenure == 0&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tenure_con_0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">tenure_con_0</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No existen filas con 0 en Tenure&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RowNumber</th>
+      <th>CustomerId</th>
+      <th>Surname</th>
+      <th>CreditScore</th>
+      <th>Geography</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Tenure</th>
+      <th>Balance</th>
+      <th>NumOfProducts</th>
+      <th>HasCrCard</th>
+      <th>IsActiveMember</th>
+      <th>EstimatedSalary</th>
+      <th>Exited</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>29</th>
+      <td>30</td>
+      <td>15656300</td>
+      <td>Lucciano</td>
+      <td>411</td>
+      <td>France</td>
+      <td>Male</td>
+      <td>29</td>
+      <td>0.0</td>
+      <td>59697.17</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>53483.21</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>36</td>
+      <td>15794171</td>
+      <td>Lombardo</td>
+      <td>475</td>
+      <td>France</td>
+      <td>Female</td>
+      <td>45</td>
+      <td>0.0</td>
+      <td>134264.04</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>27822.99</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>58</td>
+      <td>15647091</td>
+      <td>Endrizzi</td>
+      <td>725</td>
+      <td>Germany</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>0.0</td>
+      <td>75888.20</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>45613.75</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>73</td>
+      <td>15812518</td>
+      <td>Palermo</td>
+      <td>657</td>
+      <td>Spain</td>
+      <td>Female</td>
+      <td>37</td>
+      <td>0.0</td>
+      <td>163607.18</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>44203.55</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>128</td>
+      <td>15782688</td>
+      <td>Piccio</td>
+      <td>625</td>
+      <td>Germany</td>
+      <td>Male</td>
+      <td>56</td>
+      <td>0.0</td>
+      <td>148507.24</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>46824.08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9793</th>
+      <td>9794</td>
+      <td>15772363</td>
+      <td>Hilton</td>
+      <td>772</td>
+      <td>Germany</td>
+      <td>Female</td>
+      <td>42</td>
+      <td>0.0</td>
+      <td>101979.16</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>90928.48</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9799</th>
+      <td>9800</td>
+      <td>15722731</td>
+      <td>Manna</td>
+      <td>653</td>
+      <td>France</td>
+      <td>Male</td>
+      <td>46</td>
+      <td>0.0</td>
+      <td>119556.10</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>78250.13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9843</th>
+      <td>9844</td>
+      <td>15778304</td>
+      <td>Fan</td>
+      <td>646</td>
+      <td>Germany</td>
+      <td>Male</td>
+      <td>24</td>
+      <td>0.0</td>
+      <td>92398.08</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>18897.29</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9868</th>
+      <td>9869</td>
+      <td>15587640</td>
+      <td>Rowntree</td>
+      <td>718</td>
+      <td>France</td>
+      <td>Female</td>
+      <td>43</td>
+      <td>0.0</td>
+      <td>93143.39</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>167554.86</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9919</th>
+      <td>9920</td>
+      <td>15798084</td>
+      <td>Murray</td>
+      <td>688</td>
+      <td>France</td>
+      <td>Male</td>
+      <td>26</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>105784.85</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>382 rows × 14 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rellenar TODOS los valores nulos en todas las columnas con 0</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>NOTA:</strong></p>
+<p>En este caso, los valores nulos no afectan con lo requerido para esta práctica, pero si con el uso de los modelos, así que decidí llenar los valores nulos a 0 debido a que Tenure es un producto que maneja temporalidades y si está nulo es porque no han adquirido ese producto por lo que se puede representar como que llevan 0 años de periodo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Se analiza la columna &#39;Exited&#39; si tiene strings</span>
+<span class="n">converted</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Exited&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="n">string_values</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Exited&#39;</span><span class="p">][</span><span class="n">converted</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Exited&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">string_values</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Se encontraron </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">string_values</span><span class="p">)</span><span class="si">}</span><span class="s2"> valores string:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">string_values</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No se encontraron strings en la columna&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No se encontraron strings en la columna
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Eliminamos columnas innecesarias</span>
+<span class="n">drop_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;RowNumber&#39;</span><span class="p">,</span><span class="s1">&#39;CustomerId&#39;</span><span class="p">,</span><span class="s1">&#39;Surname&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#U tilizamos la tecnica de OHE</span>
+<span class="n">data_ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">drop_cols</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">data_ohe</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Exited&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">data_ohe</span><span class="p">[</span><span class="s1">&#39;Exited&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrenamiento del modelo</span>
+<span class="n">features_train</span><span class="p">,</span> <span class="n">features_valid</span><span class="p">,</span> <span class="n">target_train</span><span class="p">,</span> <span class="n">target_valid</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">)</span>
+
+<span class="c1"># Info y muetras de datos </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">features_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">features_valid</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">features_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7500, 11)
+(2500, 11)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CreditScore</th>
+      <th>Age</th>
+      <th>Tenure</th>
+      <th>Balance</th>
+      <th>NumOfProducts</th>
+      <th>HasCrCard</th>
+      <th>IsActiveMember</th>
+      <th>EstimatedSalary</th>
+      <th>Geography_Germany</th>
+      <th>Geography_Spain</th>
+      <th>Gender_Male</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>226</th>
+      <td>694</td>
+      <td>30</td>
+      <td>9.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>26960.31</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>7756</th>
+      <td>621</td>
+      <td>36</td>
+      <td>7.0</td>
+      <td>116338.68</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>155743.48</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2065</th>
+      <td>626</td>
+      <td>33</td>
+      <td>8.0</td>
+      <td>0.00</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>138504.28</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2800</th>
+      <td>769</td>
+      <td>51</td>
+      <td>9.0</td>
+      <td>156773.78</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>40257.79</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7028</th>
+      <td>718</td>
+      <td>26</td>
+      <td>0.0</td>
+      <td>147527.03</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>51099.56</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_counts</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribución de clases en el dataset completo (%):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">target</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mf">5.5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">class_counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">class_counts</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="n">class_counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>   <span class="c1"># evita el warning asignando hue</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">False</span>              <span class="c1"># quita leyenda redundante</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de clases (Exited)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Exited (0 = Se queda, 1 = Se va)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cantidad de clientes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">class_counts</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">class_counts</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribución de clases en el dataset completo (%):
+Exited
+0    79.63
+1    20.37
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+<img alt="_images/56947a3479754fae35f87fa812c7a5691321228e0ff67c7e6b74f42449cbe5f3.png" src="_images/56947a3479754fae35f87fa812c7a5691321228e0ff67c7e6b74f42449cbe5f3.png" />
+</div>
+</div>
+<p><strong>NOTA:</strong> El dataset está desbalanceado, lo que puede afectar el rendimiento del modelo, especialmente en la detección de la clase minoritaria</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Logistic Regression</span>
+<span class="n">lr_model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;liblinear&#39;</span><span class="p">)</span>
+<span class="n">lr_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">target_train</span><span class="p">)</span>
+<span class="n">lr_preds</span> <span class="o">=</span> <span class="n">lr_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_valid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logistic Regression exactitud:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">lr_preds</span><span class="p">))</span>
+
+<span class="c1"># Decision Tree</span>
+<span class="n">dt_model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">dt_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">target_train</span><span class="p">)</span>
+<span class="n">dt_preds</span> <span class="o">=</span> <span class="n">dt_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_valid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Decision Tree exactitud:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">dt_preds</span><span class="p">))</span>
+
+<span class="c1"># Random Forest</span>
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">target_train</span><span class="p">)</span>
+<span class="n">rf_preds</span> <span class="o">=</span> <span class="n">rf_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_valid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest exactitud:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">rf_preds</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Logistic Regression exactitud: 0.6876
+Decision Tree exactitud: 0.796
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Random Forest exactitud: 0.8512
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Logistic Regression</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logistic Regression recall:&quot;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">lr_preds</span><span class="p">))</span>
+
+<span class="c1"># Decision Tree</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Decision Tree recall:&quot;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">dt_preds</span><span class="p">))</span>
+
+<span class="c1"># Random Forest</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest recall:&quot;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">rf_preds</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Logistic Regression recall: 0.702803738317757
+Decision Tree recall: 0.497196261682243
+Random Forest recall: 0.42990654205607476
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Logistic Regression</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logistic Regression precisión :&quot;</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">lr_preds</span><span class="p">))</span>
+
+<span class="c1"># Decision Tree</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Decision Tree precisión :&quot;</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">dt_preds</span><span class="p">))</span>
+
+<span class="c1"># Random Forest</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest precisión :&quot;</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">rf_preds</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Logistic Regression precisión : 0.37675350701402804
+Decision Tree precisión : 0.52465483234714
+Random Forest precisión : 0.7744107744107744
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Logistic Regression</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logistic Regression F1 :&quot;</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">lr_preds</span><span class="p">))</span>
+
+<span class="c1"># Decision Tree</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Decision Tree F1 :&quot;</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">dt_preds</span><span class="p">))</span>
+
+<span class="c1"># Random Forest</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest F1 :&quot;</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">rf_preds</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Logistic Regression F1 : 0.49054142204827134
+Decision Tree F1 : 0.510556621880998
+Random Forest F1 : 0.5528846153846154
+</pre></div>
+</div>
+</div>
+</div>
+<p>Modelo seleccionado: <strong>Random Forest</strong></p>
+<ul class="simple">
+<li><p>Exactitud: 85%</p></li>
+<li><p>Recall: 42%</p></li>
+<li><p>Precisión: 77%</p></li>
+<li><p>F1: 55% (Métrica a mejorar)</p></li>
+</ul>
+<p>Fue el modelo con las mejores estadísticas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Funición upsample() para trabajar el sobremuestreo</span>
+<span class="k">def</span> <span class="nf">upsample</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">repeat</span><span class="p">):</span>
+    <span class="n">features_zeros</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">features_ones</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">target_zeros</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">target_ones</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">features_upsampled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">features_zeros</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">features_ones</span><span class="p">]</span> <span class="o">*</span> <span class="n">repeat</span><span class="p">)</span>
+    <span class="n">target_upsampled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">target_zeros</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">target_ones</span><span class="p">]</span> <span class="o">*</span> <span class="n">repeat</span><span class="p">)</span>
+
+    <span class="n">features_upsampled</span><span class="p">,</span> <span class="n">target_upsampled</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span>
+        <span class="n">features_upsampled</span><span class="p">,</span> <span class="n">target_upsampled</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">features_upsampled</span><span class="p">,</span> <span class="n">target_upsampled</span>
+
+
+<span class="n">features_upsampled</span><span class="p">,</span> <span class="n">target_upsampled</span> <span class="o">=</span> <span class="n">upsample</span><span class="p">(</span>
+    <span class="n">features_train</span><span class="p">,</span> <span class="n">target_train</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Se entrena el modelo con datos filtrados por sobremuestreo</span>
+<span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_upsampled</span><span class="p">,</span> <span class="n">target_upsampled</span><span class="p">)</span>
+<span class="n">pred_valid_up</span> <span class="o">=</span> <span class="n">rf_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_valid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest exactitud:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">pred_valid_up</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest recall:&quot;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">pred_valid_up</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest precisión :&quot;</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">pred_valid_up</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Random Forest F1:&#39;</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">pred_valid_up</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Random Forest exactitud: 0.8476
+Random Forest recall: 0.5551401869158878
+Random Forest precisión : 0.675
+Random Forest F1: 0.6092307692307692
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Funición downsample() para trabajar el submuestreo</span>
+<span class="k">def</span> <span class="nf">downsample</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">fraction</span><span class="p">):</span>
+    <span class="n">features_zeros</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">features_ones</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">target_zeros</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">target_ones</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">features_downsampled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">features_zeros</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="n">fraction</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">)]</span>
+        <span class="o">+</span> <span class="p">[</span><span class="n">features_ones</span><span class="p">])</span>
+    
+    <span class="n">target_downsampled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">target_zeros</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="n">fraction</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">)]</span>
+        <span class="o">+</span> <span class="p">[</span><span class="n">target_ones</span><span class="p">])</span>
+
+    <span class="n">features_downsampled</span><span class="p">,</span> <span class="n">target_downsampled</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span>
+        <span class="n">features_downsampled</span><span class="p">,</span> <span class="n">target_downsampled</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">features_downsampled</span><span class="p">,</span> <span class="n">target_downsampled</span>
+
+
+<span class="n">features_downsampled</span><span class="p">,</span> <span class="n">target_downsampled</span> <span class="o">=</span> <span class="n">downsample</span><span class="p">(</span>
+    <span class="n">features_train</span><span class="p">,</span> <span class="n">target_train</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Se entrena el modelo con datos filtrados por submuestreo</span>
+<span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_downsampled</span><span class="p">,</span> <span class="n">target_downsampled</span><span class="p">)</span>
+<span class="n">pred_valid_down</span> <span class="o">=</span> <span class="n">rf_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_valid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest exactitud:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">pred_valid_down</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest recall:&quot;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">pred_valid_down</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest precisión :&quot;</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">pred_valid_down</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Random Forest F1:&#39;</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">pred_valid_down</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Random Forest exactitud: 0.6032
+Random Forest recall: 0.9233644859813084
+Random Forest precisión : 0.34186851211072666
+Random Forest F1: 0.498989898989899
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>CONCLUSIÓN PARA F1</strong></p>
+<p>Se logró obtener F1 = 0.609 para el modelo escogido, al final se tuvo que usar el hiperparámetro “class_weight=’balanced’” y entrenar los datos mediante sobremuestreo y submuestreo, observando que en el submuestreo las estadísticas no fueron favorables como en el sobremuestreo.</p>
+<p>Estadísticas finales usando <strong>sobremuestreo</strong>:</p>
+<ul class="simple">
+<li><p>Random Forest exactitud: 0.84</p></li>
+<li><p>Random Forest recall: 0.55</p></li>
+<li><p>Random Forest precisión : 0.67</p></li>
+<li><p>Random Forest F1: 0.609 (<strong>META LOGRADA</strong>)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_upsampled</span><span class="p">,</span> <span class="n">target_upsampled</span><span class="p">)</span>
+
+<span class="n">probabilities_valid</span> <span class="o">=</span> <span class="n">rf_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">features_valid</span><span class="p">)</span>
+<span class="n">probabilities_one_valid</span> <span class="o">=</span> <span class="n">probabilities_valid</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">probabilities_one_valid</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tasa de falsos positivos&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Tasa de verdaderos positivos&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Curva ROC&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e80e552d8e8772f120eb305e3b0b6985dcaea95f7316d0b53113d47c9cf0d5e4.png" src="_images/e80e552d8e8772f120eb305e3b0b6985dcaea95f7316d0b53113d47c9cf0d5e4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">auc_roc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">target_valid</span><span class="p">,</span> <span class="n">probabilities_one_valid</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AUC_ROC del modelo: &#39;</span><span class="p">,</span> <span class="n">auc_roc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUC_ROC del modelo:  0.8472711707212671
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>NOTA</strong>: La curva ROC tiene una inclinación prominente a la punta superior izquierda por lo que el resultado es mejor que el modelo aleatorio</p>
+<p><strong>CONCLUSIÓN FINAL:</strong></p>
+<p>Se hicieron comparaciones entre las estadísticas de 3 modelos para poder escoger el mejor. Cuando se escogió el modelo RANDOM FOREST como el mejor, también se tuvo en cuenta que el valor de F1 era muy bajo, por lo que se trabajó para poderlo aumentar, se le agregó un class_weight=’balanced’ y también se sometió a una prueba de sobremuestreo para emparejar las observaciones, esta técnica ayuda al modelo a reconocer y clasificar mejor las instancias de clase minoritaria, lo que finalmente aumenta el valor F1.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="instrucciones.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Instrucciones del proyecto</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Carlos A. Ibarra Del Ángel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
